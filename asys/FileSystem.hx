@@ -122,14 +122,14 @@ class FileSystem {
 	
 	public static function exists(path: String): Future<Bool>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function ()
+			tink.io.Worker.get().work(function ()
 				done(sys.FileSystem.exists(path))
 			)
 		);
 
 	public static function rename(path: String, newPath: String): Promise<Noise>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try {
 					sys.FileSystem.rename(path, newPath);
 					Success(Noise);
@@ -140,7 +140,7 @@ class FileSystem {
 		
 	public static function stat(path: String): Promise<FileStat>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try Success(sys.FileSystem.stat(path))
 				catch (e: Dynamic) Failure(new Error('$e'))
 			))
@@ -148,7 +148,7 @@ class FileSystem {
 
 	public static function fullPath(relPath: String): Promise<String>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try Success(sys.FileSystem.fullPath(relPath))
 				catch (e: Dynamic) Failure(new Error('$e'))
 			))
@@ -159,7 +159,7 @@ class FileSystem {
 
 	public static function isDirectory(path: String): Future<Bool>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try sys.FileSystem.isDirectory(path)
 				catch (e: Dynamic) false
 			))
@@ -167,7 +167,7 @@ class FileSystem {
 
 	public static function createDirectory(path: String): Promise<Noise> 
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try {
 					sys.FileSystem.createDirectory(path);
 					Success(Noise);
@@ -178,7 +178,7 @@ class FileSystem {
 
 	public static function deleteFile(path: String): Promise<Noise>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try {
 					sys.FileSystem.deleteFile(path);
 					Success(Noise);
@@ -189,7 +189,7 @@ class FileSystem {
 
 	public static function deleteDirectory(path: String): Promise<Noise> 
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try {
 					sys.FileSystem.deleteDirectory(path);
 					Success(Noise);
@@ -200,7 +200,7 @@ class FileSystem {
 
 	public static function readDirectory(path: String): Promise<Array<String>>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try Success(sys.FileSystem.readDirectory(path))
 				catch (e: Dynamic) Failure(new Error('$e'))
 			))

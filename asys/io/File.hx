@@ -136,7 +136,7 @@ class File {
 	
 	public static function getContent(path: String): Promise<String>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try Success(sys.io.File.getContent(path))
 				catch (e: Dynamic) Failure(new Error('$e'))
 			))
@@ -144,7 +144,7 @@ class File {
 
 	public static function saveContent(path: String, content: String): Promise<Noise>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try {
 					sys.io.File.saveContent(path, content);
 					Success(Noise);
@@ -155,7 +155,7 @@ class File {
 
 	public static function getBytes(path: String): Promise<haxe.io.Bytes>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try Success(sys.io.File.getBytes(path))
 				catch(e: Dynamic) Failure(new Error('$e'))
 			))
@@ -163,7 +163,7 @@ class File {
 
 	public static function saveBytes(path: String, bytes: haxe.io.Bytes): Promise<Noise>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try {
 					sys.io.File.saveBytes(path, bytes);
 					Success(Noise);
@@ -174,7 +174,7 @@ class File {
 
 	public static function read(path: String, binary = true): Promise<FileInput>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try Success(sys.io.File.read(path, binary))
 				catch (e: Dynamic) Failure(new Error('$e'))
 			))
@@ -182,7 +182,7 @@ class File {
 
 	public static function write(path : String, binary: Bool = true): Promise<FileOutput>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try Success(sys.io.File.write(path, binary))
 				catch (e: Dynamic) Failure(new Error('$e'))
 			))
@@ -190,7 +190,7 @@ class File {
 
 	public static function append(path : String, binary : Bool = true): Promise<FileOutput>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try Success(sys.io.File.append(path, binary))
 				catch (e: Dynamic) Failure(new Error('$e'))
 			))
@@ -198,7 +198,7 @@ class File {
 
 	public static function copy(srcPath: String, dstPath: String): Promise<Noise>
 		return Future.async(function(done)
-			tink.RunLoop.current.work(function () done(
+			tink.io.Worker.get().work(function () done(
 				try {
 					sys.io.File.copy(srcPath, dstPath);
 					Success(Noise);
